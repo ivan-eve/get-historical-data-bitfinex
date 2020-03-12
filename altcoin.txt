@@ -1,0 +1,124 @@
+AdEx,ADX
+aelf,ELF
+Aion,AION
+Aragon,ANT
+Ardor,ARDR
+ARK,ARK
+Augur,REP
+Basic Attention Token,BAT
+Binance Coin,BNB
+Bitcoin,BTC
+Bitcoin Cash,BCH
+Bitcoin Diamond,BCD
+Bitcoin Gold,BTG
+Bitcoin Private,BTCP
+BitShares,BTS
+Byteball Bytes,GBYTE
+Bytecoin,BCN
+Bytom,BTM
+Cardano,ADA
+Centrality,CENNZ
+ChainLink,LINK
+Civic,CVC
+Dash,DASH
+Decentraland,MANA
+Decred,DCR
+Dentacoin,DCN
+DentCoin,DENT
+Digibyte,DGB
+DigixDAO,DGD
+Dogecoin,DOGE
+Einsteinium,EMC2
+Elastos,ELA
+Electroneum,ETN
+Enjin Coin,ENJ
+EOS,EOS
+Ethereum,ETH
+Ethereum Classic,ETC
+ETHLend,LEND
+Ethos,ETHOS
+Factom,FCT
+FunFair,FUN
+Fusion,FSN
+Game.coin,GTC
+GameCredits,GAME
+GAS,GAS
+Gnosis,GNO
+Golem,GNT
+GXChain,GXS
+Horizon State,HST
+ICON,ICX
+ICONOMI,ICN
+IOStoken,IOST
+IoT Chain,ITC
+IOTA,MIOTA
+Kin,KIN
+Komodo,KMD
+Kucoin Shares,KCS
+KyberNetwork,KNC
+LBRY Credits,LBC
+Lisk,LSK
+Litecoin,LTC
+Litecoin Cash,LCC
+Loom Network,LOOM
+Loopring,LRC
+MaidSafeCoin,MAID
+Metal,MTL
+Mithril,MITH
+Mixin,XIN
+Monaco,MCO
+Monero,XMR
+Namecoin,NMC
+Nano,XRB
+NAV Coin,NAV
+Neblio,NEBL
+NEM,XEM
+NEO,NEO
+Nexus,NXS
+Nucleus Vision,NCASH
+Nxt,NXT
+OmiseGO,OMG
+Ontology,ONT
+PacCoin,PAC
+Peercoin,PPC
+PIVX,PIVX
+Po.et,POE
+Polymath,POLY
+Populous,PPT
+Potcoin,POT
+Power Ledger,POWR
+Pundi X,NPXS
+QASH,QASH
+Qtum,QTUM
+Quantstamp,QSP
+Ravencoin,RVN
+Reddcoin,RDD
+Request,REQ
+Ripple,XRP
+Rise,RISE
+Safe Exchange coin,SAFEX
+SALT,SALT
+Siacoin,SC
+SmartCash,SMART
+Sports Coin,SOC
+Status,SNT
+Steem,STEEM
+Stellar Lumens,XLM
+Stratis,STRAT
+Syscoin,SYS
+TenX,PAY
+Tether,USDT
+Time New Bank,TNB
+TRON,TRX
+VeChain,VET
+Verge,XVG
+Veritaseum,VERI
+Vertcoin,VTC
+Walton,WTC
+Wanchain,WAN
+Waves,WAVES
+WAX,WAX
+YOYOW,YOYO
+Zcash,ZEC
+ZCoin,XZC
+Zilliqa,ZIL
