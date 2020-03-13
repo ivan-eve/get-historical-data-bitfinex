@@ -7,14 +7,17 @@ from tqdm import tqdm
 import sys
 import json
 from bitfinex import WssClient, ClientV2, ClientV1
+import eventlet
+from requests.exceptions import ConnectionError, ReadTimeout
+eventlet.monkey_patch()
 
 # Define query parameters
 PAIR = 'BNBUSD' # Currency pair of interest
 BINSIZE = '5m' # This will return minute data
-LIMIT = 1000    # We want the maximum of 1000 data points 
+LIMIT = 10000    # We want the maximum of 1000 data points 
 APIKEY = 'Lm4QXQhVHUH24UeY2Ym4ih5NnpYYk3TtG8V4hb9jJiC' #your apikey of bitfinex
 APISECRET = 'Bs7bjJUUUl4byEMUFdApx7tbzSd2pSFEA7YE2mcOpQe' # your secret key of bitfinex
-TIMESTEP = 90000000 # Set step size
+STEP_DAYS = 30 # Set step size of days
 
 # Connection BitFinex
 bfx_client = ClientV2(APIKEY,APISECRET)
@@ -64,9 +67,7 @@ def generate_rango(start,end,step_days):
     
     for days in range(dias_totales + 1):
         try:
-            _date = start + datetime.timedelta(days=days) 
-        
-            
+            _date = start + datetime.timedelta(days=days)
             if aux < dias:
                 secon_list.append(_date.strftime("%Y-%m-%d %H:%M:%S"))
                 aux = aux + 1
@@ -80,30 +81,41 @@ def generate_rango(start,end,step_days):
         except Exception as err:
             print(err)
 
-    rango.append(obj)        
+    rango.append(obj)      
     return (rango)
-
-
 
 
 def get_data(altcoin, timeframe,start, end):
     altcoin_list = [(item.splitlines()[0]).split(',') for item in altcoin ]
-    obj = generate_rango(start,end,365)
+    obj = generate_rango(start,end,STEP_DAYS)
     retorno_data = []
     no_ = []
+    no_data = [(x.splitlines()[0]) for x in open('no_data.txt','r').readlines()]
     for item in tqdm(altcoin_list,ascii=True,desc='List altcoin'):
         symbol = 't{}USD'.format(item[1])
-        validate_symbol = bfx_client.tickers([symbol])
-        time.sleep(1)
-        if validate_symbol:
+
+        
+        if symbol not in no_data:
             for key in tqdm(obj[0].keys(),ascii=True,desc=symbol):
+                # with open('test.txt','a') as file:
+                #     file.writelines(str(json.dumps(obj[0][key],indent=4)))
                 _min = (datetime2.strptime(min(obj[0][key]),"%Y-%m-%d %H:%M:%S"))
                 _max = (datetime2.strptime(max(obj[0][key]),"%Y-%m-%d %H:%M:%S"))
+                
                 start = time.mktime(_min.timetuple()) * 1000
                 stop = time.mktime(_max.timetuple()) * 1000
-                candles = bfx_client.candles(timeframe=timeframe,symbol=symbol,section='hist',limit=LIMIT,start=start,end=stop,sort=1)
+
+                try:
+                    with eventlet.Timeout(10):
+                        candles = bfx_client.candles(timeframe=timeframe,symbol=symbol,section='hist',limit=LIMIT,start=start,end=stop,sort=1)
+                    
+                except (ConnectionError, ReadTimeout) as err:
+                    print(err)
+                    time.sleep(5)
+
+
                 retorno_data.extend(candles)
-                time.sleep(1)
+                time.sleep(2)
         else:
             no_.append(symbol)
         save_data(item[0],symbol, retorno_data)
@@ -115,10 +127,8 @@ def get_data(altcoin, timeframe,start, end):
 
 # Define the start date 
 t_start = datetime.datetime(2014, 1, 1)
-
 # Define the end date
 t_stop = datetime.datetime(2020, 2, 29)
-stop = time.mktime(t_stop.timetuple()) * 1000
 
 with open('./altcoin.txt','r') as altcoin:
     altcoin = altcoin.readlines()
